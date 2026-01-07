@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Play, Github, Linkedin, ChevronDown } from "lucide-react";
+import { ArrowRight, Download, Github, Linkedin, ChevronDown } from "lucide-react";
 import profileImage from "@/assets/profile-shivam.jpg";
 
 const roles = ["Software Developer", "Mobile App Developer", "Automation Expert"];
@@ -90,8 +90,10 @@ const Hero = () => {
             <div className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-4">
                 Hello, I'm{" "}
-                <span className="text-gradient relative">
-                  Shivam Jaiswal
+                <span className="relative inline-block">
+                  <span className="bg-gradient-to-r from-primary via-orange-500 to-primary bg-clip-text text-transparent">
+                    Shivam Jaiswal
+                  </span>
                   <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 10" preserveAspectRatio="none">
                     <path d="M0,5 Q50,0 100,5 T200,5" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" className="animate-draw" />
                   </svg>
@@ -116,9 +118,9 @@ const Hero = () => {
                 </a>
               </Button>
               <Button variant="heroOutline" size="lg" className="group" asChild>
-                <a href="#about">
-                  <Play className="mr-2 group-hover:scale-110 transition-transform" size={20} /> 
-                  Learn More
+                <a href="/resume/shivam-jaiswal-resume.pdf" download>
+                  <Download className="mr-2 group-hover:scale-110 transition-transform" size={20} /> 
+                  Download Resume
                 </a>
               </Button>
             </div>
@@ -146,7 +148,7 @@ const Hero = () => {
                   {[1, 2, 3].map((i) => (
                     <div 
                       key={i} 
-                      className="w-10 h-10 rounded-full gradient-primary border-2 border-background flex items-center justify-center text-xs font-bold text-primary-foreground"
+                      className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-orange-500 border-2 border-background flex items-center justify-center text-xs font-bold text-primary-foreground"
                     >
                       {i === 1 ? "☕" : i === 2 ? "📱" : "💻"}
                     </div>
@@ -162,18 +164,19 @@ const Hero = () => {
           {/* Right Content - Profile Image */}
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative animate-fade-in">
-              {/* Animated ring */}
-              <div className="absolute inset-0 -m-4 rounded-full border-2 border-dashed border-primary/30 animate-spin-slow" style={{ animationDuration: "20s" }} />
-              <div className="absolute inset-0 -m-8 rounded-full border-2 border-dotted border-secondary/20 animate-spin-slow" style={{ animationDuration: "30s", animationDirection: "reverse" }} />
+              {/* Animated rings */}
+              <div className="absolute inset-0 -m-6 rounded-full border-2 border-dashed border-primary/30 animate-spin-slow" style={{ animationDuration: "20s" }} />
+              <div className="absolute inset-0 -m-12 rounded-full border-2 border-dotted border-secondary/20 animate-spin-slow" style={{ animationDuration: "30s", animationDirection: "reverse" }} />
               
               {/* Background glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full blur-3xl scale-110 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/40 to-secondary/40 rounded-full blur-3xl scale-125 animate-pulse" />
               
-              {/* Yellow accent shape */}
-              <div className="absolute -top-6 -right-6 w-72 h-72 md:w-80 md:h-80 gradient-primary rounded-3xl rotate-6 opacity-90 shadow-glow" />
+              {/* Decorative gradient arc behind image */}
+              <div className="absolute -inset-4 rounded-full bg-gradient-to-br from-primary/20 via-transparent to-secondary/20" />
               
               {/* Image container with circular mask */}
-              <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-background shadow-elevated pulse-glow">
+              <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-primary/30 shadow-elevated">
+                <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent z-10 pointer-events-none" />
                 <img
                   src={profileImage}
                   alt="Shivam Jaiswal - Software Developer"
@@ -182,8 +185,8 @@ const Hero = () => {
               </div>
 
               {/* Floating badge */}
-              <div className="absolute -bottom-4 -left-4 bg-background rounded-2xl p-4 shadow-elevated flex items-center gap-3 animate-float">
-                <div className="w-14 h-14 gradient-primary rounded-xl flex items-center justify-center">
+              <div className="absolute -bottom-4 -left-4 bg-background/90 backdrop-blur-sm rounded-2xl p-4 shadow-elevated flex items-center gap-3 animate-float border border-border">
+                <div className="w-14 h-14 bg-gradient-to-br from-primary to-orange-500 rounded-xl flex items-center justify-center">
                   <span className="text-primary-foreground font-bold text-xl">4+</span>
                 </div>
                 <div>
@@ -193,7 +196,7 @@ const Hero = () => {
               </div>
 
               {/* Tech floating badge */}
-              <div className="absolute top-4 -right-8 bg-background rounded-xl px-4 py-2 shadow-elevated animate-float-delayed hidden md:block">
+              <div className="absolute top-4 -right-8 bg-background/90 backdrop-blur-sm rounded-xl px-4 py-2 shadow-elevated animate-float-delayed hidden md:block border border-border">
                 <p className="text-sm font-semibold text-foreground">React Native</p>
               </div>
             </div>
