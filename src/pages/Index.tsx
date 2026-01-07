@@ -7,10 +7,12 @@ import Portfolio from "@/components/Portfolio";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import CursorFollower from "@/components/CursorFollower";
+import RainbowParticles from "@/components/RainbowParticles";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
+      <RainbowParticles />
       <CursorFollower />
       <Navbar />
       <Hero />

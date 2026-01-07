@@ -135,7 +135,7 @@ const Hero = () => {
                 <Github size={22} />
               </a>
               <a
-                href="https://linkedin.com/in/shivam_6371"
+                href="https://www.linkedin.com/in/shivam-jaiswal-cgu/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 rounded-xl bg-muted hover:bg-primary hover:text-primary-foreground flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-glow"
