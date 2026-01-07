@@ -52,11 +52,16 @@ const RainbowParticles = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
+    // Check if click was on an interactive element
+    const target = e.target as HTMLElement;
+    const isInteractive = target.closest('a, button, input, textarea, select, [role="button"], [tabindex]');
+    if (isInteractive) return;
+
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Create burst of particles
+    // Create burst of particles only on empty background
     for (let i = 0; i < 30; i++) {
       particlesRef.current.push(createBurstParticle(x, y));
     }
@@ -168,8 +173,8 @@ const RainbowParticles = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-[1]"
-      style={{ pointerEvents: "auto" }}
+      className="fixed inset-0 z-[1]"
+      style={{ pointerEvents: "none" }}
     />
   );
 };
