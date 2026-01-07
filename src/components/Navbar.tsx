@@ -55,8 +55,8 @@ const Navbar = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled 
-          ? "bg-background/80 backdrop-blur-xl shadow-lg border-b border-border/50" 
-          : "bg-transparent"
+          ? "bg-card/95 backdrop-blur-xl shadow-lg border-b border-border/50" 
+          : "bg-card/60 backdrop-blur-md"
       }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
