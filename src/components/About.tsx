@@ -147,7 +147,7 @@ const About = () => {
                 </a>
               </Button>
               <Button variant="outline" className="group" asChild>
-                <a href="#portfolio">
+                <a href="/resume/shivam-jaiswal-resume.pdf" download="shivam-jaiswal-resume.pdf">
                   <Download className="mr-2 group-hover:animate-bounce" size={18} /> Download CV
                 </a>
               </Button>
