@@ -92,7 +92,7 @@ const Skills = () => {
             Skills & Expertise
           </span>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground">
-            Technical <span className="text-gradient">Expertise</span>
+            Technical <span className="bg-gradient-to-r from-primary to-orange-500 bg-clip-text text-transparent">Expertise</span>
           </h2>
           <p className="text-muted-foreground mt-4 max-w-2xl mx-auto">
             A comprehensive toolkit spanning mobile development, web technologies, and modern DevOps practices
@@ -239,8 +239,8 @@ const Skills = () => {
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div>
               <h4 className="text-lg font-bold text-foreground mb-2">Currently Working At</h4>
-              <p className="text-2xl font-bold text-gradient">Abrosys Technology Pvt. Ltd.</p>
-              <p className="text-muted-foreground mt-1">Software Developer (Mobile & Automation)</p>
+              <p className="text-2xl font-bold bg-gradient-to-r from-primary to-orange-500 bg-clip-text text-transparent">Abrosys Technology Pvt. Ltd.</p>
+              <p className="text-foreground mt-1">Software Developer (Mobile & Automation)</p>
             </div>
             <div className="flex gap-4">
               <div className="text-center px-6 py-3 bg-background/50 rounded-2xl">
