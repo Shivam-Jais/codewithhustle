@@ -1,83 +1,84 @@
 import { Github, Linkedin, Mail, Heart, ArrowUp } from "lucide-react";
+import { PERSONAL, NAV_LINKS } from "@/data/resume";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
-    <footer className="bg-foreground text-background py-12 relative">
-      {/* Back to top button */}
+    <footer className="bg-card border-t border-border/40 py-12 relative">
+      {/* Back to top */}
       <button
         onClick={scrollToTop}
-        className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 gradient-primary rounded-full flex items-center justify-center shadow-glow hover:scale-110 transition-transform duration-300"
+        className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform duration-300"
         aria-label="Back to top"
       >
-        <ArrowUp size={20} className="text-primary-foreground" />
+        <ArrowUp size={18} />
       </button>
 
       <div className="container mx-auto px-4 lg:px-8">
         <div className="grid md:grid-cols-3 gap-8 items-center">
-          {/* Logo */}
+          {/* Brand */}
           <div>
-            <a href="#home" className="text-2xl font-bold inline-block hover:scale-105 transition-transform">
-              Shivam<span className="text-primary">.</span>
+            <a href="#home" className="text-xl font-bold text-foreground inline-flex items-center gap-1">
+              SJ
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
             </a>
-            <p className="text-background/60 mt-2 text-sm">
-              Software Developer specializing in mobile app development and automation.
+            <p className="text-muted-foreground mt-2 text-sm max-w-xs">
+              Software Developer specializing in mobile application development and automation.
             </p>
           </div>
 
           {/* Quick Links */}
-          <div className="flex flex-wrap justify-center gap-6">
-            {["Home", "About", "Services", "Portfolio", "Contact"].map((link) => (
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+            {NAV_LINKS.map((link) => (
               <a
-                key={link}
-                href={`#${link.toLowerCase()}`}
-                className="text-background/60 hover:text-primary transition-colors text-sm relative group"
+                key={link.name}
+                href={link.href}
+                className="text-muted-foreground hover:text-primary transition-colors text-sm"
               >
-                {link}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300" />
+                {link.name}
               </a>
             ))}
           </div>
 
-          {/* Social Links */}
-          <div className="flex justify-center md:justify-end gap-4">
+          {/* Social */}
+          <div className="flex justify-center md:justify-end gap-3">
             <a
-              href="https://github.com/Shivam-Jais"
+              href={PERSONAL.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-xl bg-background/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"
+              className="w-9 h-9 rounded-full bg-muted/50 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 border border-border/30"
               aria-label="GitHub"
             >
-              <Github size={20} />
+              <Github size={16} />
             </a>
             <a
-              href="https://linkedin.com/in/shivam_6371"
+              href={PERSONAL.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 rounded-xl bg-background/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"
+              className="w-9 h-9 rounded-full bg-muted/50 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 border border-border/30"
               aria-label="LinkedIn"
             >
-              <Linkedin size={20} />
+              <Linkedin size={16} />
             </a>
             <a
-              href="mailto:sivamjaiswal322@gmail.com"
-              className="w-10 h-10 rounded-xl bg-background/10 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"
+              href={`mailto:${PERSONAL.email}`}
+              className="w-9 h-9 rounded-full bg-muted/50 flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-110 border border-border/30"
               aria-label="Email"
             >
-              <Mail size={20} />
+              <Mail size={16} />
             </a>
           </div>
         </div>
 
-        <div className="border-t border-background/10 mt-8 pt-8 text-center">
-          <p className="text-background/60 text-sm flex items-center justify-center gap-1 flex-wrap">
-            © {currentYear} Shivam Jaiswal. Made with 
-            <Heart className="text-primary animate-pulse mx-1" size={16} /> 
+        <div className="border-t border-border/30 mt-8 pt-8 text-center">
+          <p className="text-muted-foreground text-xs flex items-center justify-center gap-1 flex-wrap">
+            © {currentYear} {PERSONAL.name}. Built with
+            <Heart className="text-primary mx-0.5" size={12} />
             All rights reserved.
           </p>
         </div>

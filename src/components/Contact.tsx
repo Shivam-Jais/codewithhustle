@@ -3,26 +3,27 @@ import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, Mail, MapPin, Github, Linkedin, Send, Loader2, CheckCircle } from "lucide-react";
+import { Phone, Mail, MapPin, Github, Linkedin, Send, Loader2, CheckCircle, Download } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import { PERSONAL } from "@/data/resume";
 
 const contactInfo = [
   {
     icon: Phone,
     label: "Phone",
-    value: "+91 6371272745",
-    href: "tel:+916371272745",
+    value: PERSONAL.phone,
+    href: `tel:${PERSONAL.phone.replace(/\s/g, "")}`,
   },
   {
     icon: Mail,
     label: "Email",
-    value: "sivamjaiswal322@gmail.com",
-    href: "mailto:sivamjaiswal322@gmail.com",
+    value: PERSONAL.email,
+    href: `mailto:${PERSONAL.email}`,
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "Bhubaneswar, Odisha, India",
+    value: `${PERSONAL.location}, India`,
     href: "#",
   },
 ];
@@ -39,10 +40,9 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formRef.current) return;
-    
-    // Basic validation
+
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       toast({
         title: "Error",
@@ -68,8 +68,7 @@ const Contact = () => {
         description: "Thank you for reaching out. I'll get back to you soon!",
       });
       setFormData({ name: "", email: "", message: "" });
-      
-      // Reset success state after 3 seconds
+
       setTimeout(() => setIsSuccess(false), 3000);
     } catch (error) {
       console.error("EmailJS Error:", error);
@@ -84,157 +83,171 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 lg:py-32 relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5" />
-      
-      {/* Decorative elements */}
-      <div className="absolute top-20 right-20 w-32 h-32 border-4 border-primary/10 rounded-full animate-spin-slow" style={{ animationDuration: "25s" }} />
-      <div className="absolute bottom-20 left-10 w-24 h-24 bg-secondary/10 rounded-2xl rotate-45 animate-float" />
+    <section id="contact" className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Subtle background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.02] via-transparent to-secondary/[0.02]" aria-hidden="true" />
 
       <div className="container mx-auto px-4 lg:px-8 relative">
-        <div className="text-center mb-16">
-          <span className="text-primary font-semibold uppercase tracking-wider text-sm">Contact</span>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-4">
-            Let's Work Together
+        {/* Header */}
+        <div className="mb-16">
+          <span className="text-primary font-semibold uppercase tracking-widest text-xs">
+            Contact
+          </span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-3 tracking-tight">
+            Get in{" "}
+            <span className="text-primary">Touch</span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind? Let's discuss how I can help bring your ideas to life.
+          <p className="text-muted-foreground mt-4 max-w-2xl">
+            Interested in collaboration or have a project in mind? I'd love to hear from you.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <div className="space-y-8">
-            <div className="bg-gradient-to-br from-primary to-secondary rounded-3xl p-8 text-secondary-foreground relative overflow-hidden">
-              {/* Decorative pattern */}
-              <div className="absolute top-0 right-0 w-40 h-40 bg-secondary-foreground/5 rounded-full -translate-y-1/2 translate-x-1/2" />
-              <div className="absolute bottom-0 left-0 w-32 h-32 bg-secondary-foreground/5 rounded-full translate-y-1/2 -translate-x-1/2" />
-              
-              <h3 className="text-2xl font-bold mb-6 relative">Get in Touch</h3>
-              <p className="opacity-90 mb-8 relative">
-                I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
-              </p>
-
-              <div className="space-y-6 relative">
-                {contactInfo.map((info, index) => (
-                  <a
-                    key={index}
-                    href={info.href}
-                    className="flex items-center gap-4 group hover:translate-x-2 transition-transform duration-300"
-                  >
-                    <div className="w-14 h-14 bg-secondary-foreground/20 backdrop-blur-sm rounded-xl flex items-center justify-center group-hover:bg-secondary-foreground/30 transition-colors">
-                      <info.icon size={24} />
-                    </div>
-                    <div>
-                      <p className="text-sm opacity-70">{info.label}</p>
-                      <p className="font-medium">{info.value}</p>
-                    </div>
-                  </a>
-                ))}
-              </div>
-
-              <div className="mt-8 pt-8 border-t border-secondary-foreground/20 relative">
-                <p className="text-sm opacity-70 mb-4">Follow me on social media</p>
-                <div className="flex gap-4">
-                  <a
-                    href="https://github.com/Shivam-Jais"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-secondary-foreground/20 rounded-xl flex items-center justify-center hover:bg-secondary-foreground/40 hover:scale-110 transition-all duration-300"
-                  >
-                    <Github size={24} />
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/shivam_6371"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-secondary-foreground/20 rounded-xl flex items-center justify-center hover:bg-secondary-foreground/40 hover:scale-110 transition-all duration-300"
-                  >
-                    <Linkedin size={24} />
-                  </a>
+        <div className="grid lg:grid-cols-5 gap-10 max-w-6xl">
+          {/* Contact Info — 2 columns */}
+          <div className="lg:col-span-2 space-y-6">
+            {/* Contact cards */}
+            {contactInfo.map((info, index) => (
+              <a
+                key={index}
+                href={info.href}
+                className="flex items-center gap-4 group p-4 bg-card border border-border/40 rounded-2xl hover:border-primary/30 transition-all duration-300"
+              >
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors shrink-0">
+                  <info.icon className="text-primary" size={20} />
                 </div>
+                <div>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider">{info.label}</p>
+                  <p className="text-sm font-medium text-foreground">{info.value}</p>
+                </div>
+              </a>
+            ))}
+
+            {/* Social links */}
+            <div className="pt-4">
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3">
+                Connect with me
+              </p>
+              <div className="flex gap-3">
+                <a
+                  href={PERSONAL.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 rounded-xl bg-card border border-border/40 flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105"
+                  aria-label="GitHub"
+                >
+                  <Github size={18} />
+                </a>
+                <a
+                  href={PERSONAL.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 rounded-xl bg-card border border-border/40 flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105"
+                  aria-label="LinkedIn"
+                >
+                  <Linkedin size={18} />
+                </a>
+                <a
+                  href={`mailto:${PERSONAL.email}`}
+                  className="w-11 h-11 rounded-xl bg-card border border-border/40 flex items-center justify-center hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all duration-300 hover:scale-105"
+                  aria-label="Email"
+                >
+                  <Mail size={18} />
+                </a>
               </div>
+            </div>
+
+            {/* Resume download */}
+            <div className="pt-2">
+              <Button variant="heroOutline" className="rounded-full w-full group" asChild>
+                <a href={PERSONAL.resumePath} download="shivam-jaiswal-resume.pdf">
+                  <Download className="mr-2 group-hover:scale-110 transition-transform" size={16} />
+                  Download Resume
+                </a>
+              </Button>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="bg-background rounded-3xl p-8 shadow-elevated border border-border/50">
-            <h3 className="text-2xl font-bold text-foreground mb-6">Send a Message</h3>
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
-              <div className="group">
-                <label htmlFor="name" className="block text-sm font-medium text-foreground mb-2 group-focus-within:text-primary transition-colors">
-                  Your Name
-                </label>
-                <Input
-                  id="name"
-                  name="from_name"
-                  type="text"
-                  placeholder="John Doe"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
+          {/* Contact Form — 3 columns */}
+          <div className="lg:col-span-3">
+            <div className="bg-card border border-border/40 rounded-2xl p-6 md:p-8">
+              <h3 className="text-xl font-bold text-foreground mb-6">Send a Message</h3>
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid sm:grid-cols-2 gap-5">
+                  <div>
+                    <label htmlFor="contact-name" className="block text-sm font-medium text-foreground mb-2">
+                      Name
+                    </label>
+                    <Input
+                      id="contact-name"
+                      name="from_name"
+                      type="text"
+                      placeholder="Your name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                      disabled={isLoading}
+                      className="h-11 rounded-xl border-border/50 focus:border-primary"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="contact-email" className="block text-sm font-medium text-foreground mb-2">
+                      Email
+                    </label>
+                    <Input
+                      id="contact-email"
+                      name="from_email"
+                      type="email"
+                      placeholder="your@email.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                      disabled={isLoading}
+                      className="h-11 rounded-xl border-border/50 focus:border-primary"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label htmlFor="contact-message" className="block text-sm font-medium text-foreground mb-2">
+                    Message
+                  </label>
+                  <Textarea
+                    id="contact-message"
+                    name="message"
+                    placeholder="Tell me about your project or opportunity..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    required
+                    disabled={isLoading}
+                    rows={5}
+                    className="rounded-xl border-border/50 focus:border-primary resize-none"
+                  />
+                </div>
+                <Button
+                  type="submit"
+                  variant="hero"
+                  size="lg"
+                  className="w-full rounded-xl group"
                   disabled={isLoading}
-                  className="h-12 rounded-xl border-border focus:border-primary focus:ring-primary/20 transition-all"
-                />
-              </div>
-              <div className="group">
-                <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2 group-focus-within:text-primary transition-colors">
-                  Your Email
-                </label>
-                <Input
-                  id="email"
-                  name="from_email"
-                  type="email"
-                  placeholder="john@example.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                  disabled={isLoading}
-                  className="h-12 rounded-xl border-border focus:border-primary focus:ring-primary/20 transition-all"
-                />
-              </div>
-              <div className="group">
-                <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2 group-focus-within:text-primary transition-colors">
-                  Your Message
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  placeholder="Tell me about your project..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  required
-                  disabled={isLoading}
-                  rows={5}
-                  className="rounded-xl border-border focus:border-primary focus:ring-primary/20 resize-none transition-all"
-                />
-              </div>
-              <Button 
-                type="submit" 
-                variant="hero" 
-                size="lg" 
-                className="w-full group"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 className="mr-2 animate-spin" size={20} />
-                    Sending...
-                  </>
-                ) : isSuccess ? (
-                  <>
-                    <CheckCircle className="mr-2" size={20} />
-                    Message Sent!
-                  </>
-                ) : (
-                  <>
-                    <Send className="mr-2 group-hover:translate-x-1 transition-transform" size={20} />
-                    Send Message
-                  </>
-                )}
-              </Button>
-            </form>
+                >
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="mr-2 animate-spin" size={18} />
+                      Sending...
+                    </>
+                  ) : isSuccess ? (
+                    <>
+                      <CheckCircle className="mr-2" size={18} />
+                      Message Sent!
+                    </>
+                  ) : (
+                    <>
+                      <Send className="mr-2 group-hover:translate-x-0.5 transition-transform" size={18} />
+                      Send Message
+                    </>
+                  )}
+                </Button>
+              </form>
+            </div>
           </div>
         </div>
       </div>

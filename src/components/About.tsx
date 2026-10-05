@@ -1,159 +1,187 @@
 import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import { Briefcase, GraduationCap, MapPin, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { CheckCircle, Download, Briefcase, GraduationCap, Star } from "lucide-react";
+import {
+  PERSONAL,
+  PROFESSIONAL_SUMMARY,
+  EXPERIENCE,
+  EDUCATION,
+  getExperienceDuration,
+} from "@/data/resume";
 
 const About = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const expDuration = getExperienceDuration();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
-  const highlights = [
-    { number: "8+", label: "Projects Completed", icon: Star },
-    { number: "4+", label: "Months Experience", icon: Briefcase },
-    { number: "100%", label: "Client Satisfaction", icon: CheckCircle },
-  ];
+  const containerVariants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.1 },
+    },
+  };
 
-  const experiences = [
-    "React Native (Expo) Development",
-    "Android Development (Java)",
-    "REST API Integration",
-    "Windows Installer (EXE/MSI)",
-  ];
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
 
   return (
-    <section id="about" ref={sectionRef} className="py-20 lg:py-32 relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-muted/50 to-transparent" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-primary/5 rounded-full -translate-x-1/2 translate-y-1/2 blur-3xl" />
-      
-      <div className="container mx-auto px-4 lg:px-8 relative">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left - Visual */}
-          <div className={`relative transition-all duration-1000 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}`}>
-            <div className="relative z-10">
-              <div className="bg-muted rounded-3xl p-8 relative overflow-hidden">
-                {/* Decorative elements */}
-                <div className="absolute top-4 right-4 w-20 h-20 border-4 border-primary/30 rounded-2xl animate-float" />
-                <div className="absolute bottom-8 left-8 w-16 h-16 bg-secondary/20 rounded-full animate-float-delayed" />
-                
-                <div className="space-y-6">
-                  {/* Education Card */}
-                  <div className="flex items-center gap-4 group">
-                    <div className="w-16 h-16 gradient-primary rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-glow">
-                      <GraduationCap className="text-primary-foreground" size={28} />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-foreground">Master of Computer Applications</h4>
-                      <p className="text-sm text-muted-foreground">C. V. Raman Global University</p>
-                    </div>
-                  </div>
-                  
-                  {/* CGPA Progress */}
-                  <div className="bg-background rounded-2xl p-6 shadow-card hover:shadow-elevated transition-shadow duration-300">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-sm font-medium text-muted-foreground">CGPA</span>
-                      <span className="text-3xl font-bold text-gradient">8.56</span>
-                    </div>
-                    <div className="w-full bg-muted rounded-full h-3 overflow-hidden">
-                      <div 
-                        className="gradient-primary h-3 rounded-full transition-all duration-1000 ease-out"
-                        style={{ width: isVisible ? "85.6%" : "0%" }}
-                      />
-                    </div>
-                  </div>
+    <section id="about" ref={sectionRef} className="py-24 lg:py-32 relative overflow-hidden">
+      {/* Subtle background */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-muted/30 to-transparent" aria-hidden="true" />
 
-                  {/* Current Role */}
-                  <div className="bg-background rounded-2xl p-6 shadow-card hover:shadow-elevated transition-shadow duration-300 group">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Briefcase className="text-primary" size={20} />
-                      <h5 className="font-semibold text-foreground">Current Role</h5>
-                    </div>
-                    <p className="text-muted-foreground text-sm">
-                      Software Developer (Mobile & Automation)
+      <div className="container mx-auto px-4 lg:px-8 relative">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate={isVisible ? "visible" : "hidden"}
+        >
+          {/* Section Header */}
+          <motion.div variants={itemVariants} className="mb-16">
+            <span className="text-primary font-semibold uppercase tracking-widest text-xs">
+              About Me
+            </span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-3 mb-6 tracking-tight">
+              Building Production Software<br />
+              <span className="text-muted-foreground">That Solves Real Problems</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+            {/* Left: About text and summary — 3 columns */}
+            <motion.div variants={itemVariants} className="lg:col-span-3 space-y-6">
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                I'm a Software Developer at <strong className="text-foreground">{EXPERIENCE.company}</strong>, 
+                where I build and maintain production mobile applications using React Native and Expo. My work spans 
+                the full mobile development lifecycle — from API integration and authentication to testing, build 
+                generation, and deployment.
+              </p>
+
+              <p className="text-muted-foreground leading-relaxed">
+                {PROFESSIONAL_SUMMARY}
+              </p>
+
+              {/* Key facts */}
+              <div className="grid sm:grid-cols-2 gap-4 pt-4">
+                <div className="flex items-start gap-3 group">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <Briefcase className="text-primary" size={18} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">{EXPERIENCE.role}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {EXPERIENCE.startDate} — {EXPERIENCE.endDate} · {expDuration.label}
                     </p>
-                    <p className="text-primary font-medium mt-1 group-hover:translate-x-1 transition-transform">
-                      Abrosys Technology Pvt. Ltd.
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 group">
+                  <div className="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 transition-colors">
+                    <GraduationCap className="text-secondary" size={18} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">{EDUCATION.degree}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {EDUCATION.university} · CGPA: {EDUCATION.cgpa}
                     </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3 group">
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <MapPin className="text-primary" size={18} />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-foreground">{PERSONAL.location}</p>
+                    <p className="text-xs text-muted-foreground">India</p>
                   </div>
                 </div>
               </div>
-            </div>
-            
-            {/* Floating stats */}
-            <div className={`absolute -right-4 lg:-right-8 top-1/2 -translate-y-1/2 bg-background rounded-2xl p-4 shadow-elevated hidden lg:block transition-all duration-1000 delay-300 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}`}>
-              {highlights.map((item, index) => (
-                <div key={index} className={`text-center group ${index !== 0 ? "mt-4 pt-4 border-t border-border" : ""}`}>
-                  <div className="flex justify-center mb-1">
-                    <item.icon className="text-primary group-hover:scale-110 transition-transform" size={18} />
+
+              <div className="pt-4">
+                <Button variant="heroOutline" className="rounded-full group" asChild>
+                  <a href={PERSONAL.resumePath} download="shivam-jaiswal-resume.pdf">
+                    <Download className="mr-2 group-hover:scale-110 transition-transform" size={16} />
+                    Download Resume
+                  </a>
+                </Button>
+              </div>
+            </motion.div>
+
+            {/* Right: Education & Status cards — 2 columns */}
+            <motion.div variants={itemVariants} className="lg:col-span-2 space-y-4">
+              {/* Education Card */}
+              <div className="bg-card border border-border/50 rounded-2xl p-6 hover:border-primary/30 transition-all duration-300">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center">
+                    <GraduationCap className="text-primary-foreground" size={20} />
                   </div>
-                  <p className="text-2xl font-bold text-gradient">{item.number}</p>
-                  <p className="text-xs text-muted-foreground">{item.label}</p>
+                  <h4 className="font-semibold text-foreground">Education</h4>
                 </div>
-              ))}
-            </div>
-          </div>
+                <p className="text-sm font-medium text-foreground">{EDUCATION.degree}</p>
+                <p className="text-xs text-muted-foreground mt-1">{EDUCATION.university}</p>
+                <p className="text-xs text-muted-foreground">{EDUCATION.location}</p>
 
-          {/* Right - Content */}
-          <div className={`transition-all duration-1000 delay-200 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}`}>
-            <span className="text-primary font-semibold uppercase tracking-wider text-sm">About Me</span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mt-2 mb-6">
-              Building Solutions, Not Just Applications
-            </h2>
-            
-            <p className="text-muted-foreground mb-6 leading-relaxed">
-              I'm a passionate Software Developer specializing in mobile application development and automation. 
-              With hands-on experience in React Native (Expo), Android (Java), and REST APIs, I build scalable, 
-              performance-driven applications with clean UI and reliable functionality.
-            </p>
-            
-            <p className="text-muted-foreground mb-8 leading-relaxed">
-              Currently at Abrosys Technology Pvt. Ltd., I transform complex requirements into practical 
-              digital solutions. My approach combines technical expertise with creative problem-solving.
-            </p>
-
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              {experiences.map((exp, index) => (
-                <div 
-                  key={index} 
-                  className="flex items-center gap-2 group"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
-                  <CheckCircle className="text-primary group-hover:scale-110 transition-transform" size={20} />
-                  <span className="text-sm text-foreground group-hover:text-primary transition-colors">{exp}</span>
+                {/* CGPA bar */}
+                <div className="mt-4">
+                  <div className="flex justify-between mb-2">
+                    <span className="text-xs text-muted-foreground">CGPA</span>
+                    <span className="text-sm font-bold text-primary">{EDUCATION.cgpa}/10</span>
+                  </div>
+                  <div className="w-full bg-muted rounded-full h-2 overflow-hidden">
+                    <motion.div
+                      className="h-full bg-primary rounded-full"
+                      initial={{ width: 0 }}
+                      animate={isVisible ? { width: `${(EDUCATION.cgpa / 10) * 100}%` } : {}}
+                      transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+                    />
+                  </div>
                 </div>
-              ))}
-            </div>
+              </div>
 
-            <div className="flex flex-wrap gap-4">
-              <Button variant="hero" className="group" asChild>
-                <a href="#contact">
-                  Hire Me
-                </a>
-              </Button>
-              <Button variant="outline" className="group" asChild>
-                <a href="/resume/shivam-jaiswal-resume.pdf" download="shivam-jaiswal-resume.pdf">
-                  <Download className="mr-2 group-hover:animate-bounce" size={18} /> Download CV
-                </a>
-              </Button>
-            </div>
+              {/* Current role card */}
+              <div className="bg-card border border-border/50 rounded-2xl p-6 hover:border-secondary/30 transition-all duration-300">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-xl bg-secondary flex items-center justify-center">
+                    <Briefcase className="text-secondary-foreground" size={20} />
+                  </div>
+                  <h4 className="font-semibold text-foreground">Current Role</h4>
+                </div>
+                <p className="text-sm font-medium text-foreground">{EXPERIENCE.role}</p>
+                <p className="text-xs text-primary font-medium mt-1">{EXPERIENCE.company}</p>
+                <div className="mt-3 flex items-center gap-2">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                    {expDuration.startLabel} — Present
+                  </span>
+                </div>
+              </div>
+
+              {/* Experience summary */}
+              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 rounded-2xl p-6">
+                <div className="text-center">
+                  <span className="text-3xl font-bold text-primary block">{expDuration.label}</span>
+                  <span className="text-xs text-muted-foreground">
+                    Professional Experience
+                  </span>
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

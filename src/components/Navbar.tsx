@@ -1,16 +1,9 @@
-import { useState, useEffect } from "react";
-import { Menu, X, Moon, Sun, Sparkles } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "next-themes";
-import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-  { name: "Home", href: "#home" },
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Portfolio", href: "#portfolio" },
-  { name: "Contact", href: "#contact" },
-];
+import { NAV_LINKS } from "@/data/resume";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,23 +17,29 @@ const Navbar = () => {
   }, []);
 
   useEffect(() => {
+    let ticking = false;
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-      
-      // Detect active section
-      const sections = navLinks.map(link => link.href.replace("#", ""));
-      for (const section of sections.reverse()) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 150) {
-            setActiveSection(section);
-            break;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 50);
+
+          const sections = NAV_LINKS.map((link) => link.href.replace("#", ""));
+          for (const section of [...sections].reverse()) {
+            const element = document.getElementById(section);
+            if (element) {
+              const rect = element.getBoundingClientRect();
+              if (rect.top <= 150) {
+                setActiveSection(section);
+                break;
+              }
+            }
           }
-        }
+          ticking = false;
+        });
+        ticking = true;
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -48,141 +47,108 @@ const Navbar = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
+  const navItems = useMemo(
+    () =>
+      NAV_LINKS.map((link) => ({
+        ...link,
+        id: link.href.replace("#", ""),
+      })),
+    []
+  );
+
   return (
     <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled 
-          ? "bg-card/95 backdrop-blur-xl shadow-lg border-b border-border/50" 
-          : "bg-card/60 backdrop-blur-md"
+        scrolled
+          ? "bg-background/80 backdrop-blur-2xl shadow-lg border-b border-border/40"
+          : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-[72px]">
           {/* Logo */}
-          <motion.a 
-            href="#home" 
-            className="relative group flex items-center gap-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <div className="relative">
-              <div className="absolute -inset-2 bg-gradient-to-r from-primary via-orange-500 to-primary rounded-xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300" />
-              <span className="relative text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">
-                Shivam
-              </span>
-            </div>
-            <span className="text-3xl font-bold text-primary animate-pulse">.</span>
-            <Sparkles className="w-4 h-4 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-          </motion.a>
+          <a href="#home" className="relative group flex items-center gap-1">
+            <span className="text-xl font-bold tracking-tight text-foreground">
+              SJ
+            </span>
+            <span className="w-2 h-2 rounded-full bg-primary mt-auto mb-1.5 group-hover:scale-150 transition-transform duration-300" />
+          </a>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
-            {navLinks.map((link, index) => {
-              const isActive = activeSection === link.href.replace("#", "");
+          <div className="hidden md:flex items-center gap-1 bg-muted/50 backdrop-blur-sm rounded-full px-1.5 py-1.5 border border-border/30">
+            {navItems.map((link) => {
+              const isActive = activeSection === link.id;
               return (
-                <motion.a
+                <a
                   key={link.name}
                   href={link.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`relative px-4 py-2 text-sm font-medium rounded-xl transition-all duration-300 ${
-                    isActive 
-                      ? "text-primary" 
+                  className={`relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
+                    isActive
+                      ? "text-primary-foreground"
                       : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {isActive && (
                     <motion.div
-                      layoutId="activeNav"
-                      className="absolute inset-0 bg-primary/10 rounded-xl"
-                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      layoutId="nav-active"
+                      className="absolute inset-0 bg-primary rounded-full"
+                      transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
                     />
                   )}
                   <span className="relative z-10">{link.name}</span>
-                  {isActive && (
-                    <motion.div 
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full"
-                      layoutId="activeDot"
-                    />
-                  )}
-                </motion.a>
+                </a>
               );
             })}
           </div>
 
           <div className="hidden md:flex items-center gap-3">
-            {/* Dark Mode Toggle */}
-            <motion.button
+            {/* Theme Toggle */}
+            <button
               onClick={toggleTheme}
-              whileHover={{ scale: 1.1, rotate: 180 }}
-              whileTap={{ scale: 0.9 }}
-              className="relative w-11 h-11 rounded-xl bg-muted/80 hover:bg-muted flex items-center justify-center transition-colors overflow-hidden group"
+              className="w-10 h-10 rounded-full bg-muted/60 hover:bg-muted flex items-center justify-center transition-all duration-300 hover:scale-105 border border-border/30"
               aria-label="Toggle theme"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
               {mounted && (
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={theme}
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -20, opacity: 0 }}
-                    transition={{ duration: 0.2 }}
+                    initial={{ y: 10, opacity: 0, rotate: -90 }}
+                    animate={{ y: 0, opacity: 1, rotate: 0 }}
+                    exit={{ y: -10, opacity: 0, rotate: 90 }}
+                    transition={{ duration: 0.15 }}
                   >
-                    {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
+                    {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
                   </motion.div>
                 </AnimatePresence>
               )}
-            </motion.button>
-            
-            <Button variant="hero" className="group relative overflow-hidden" asChild>
+            </button>
+
+            <Button variant="hero" size="sm" className="rounded-full" asChild>
               <a href="#contact">
-                <span className="relative z-10 flex items-center gap-2">
-                  Let's Talk
-                  <motion.span
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
-                  >
-                    →
-                  </motion.span>
-                </span>
+                Let's Talk
               </a>
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center gap-3">
-            <motion.button
+          {/* Mobile Controls */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
               onClick={toggleTheme}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              className="w-10 h-10 rounded-xl bg-muted/80 flex items-center justify-center"
+              className="w-10 h-10 rounded-full bg-muted/60 flex items-center justify-center border border-border/30"
               aria-label="Toggle theme"
             >
-              {mounted && (theme === "dark" ? <Sun size={18} /> : <Moon size={18} />)}
-            </motion.button>
-            <motion.button
-              className="w-10 h-10 rounded-xl bg-muted/80 flex items-center justify-center"
+              {mounted && (theme === "dark" ? <Sun size={16} /> : <Moon size={16} />)}
+            </button>
+            <button
+              className="w-10 h-10 rounded-full bg-muted/60 flex items-center justify-center border border-border/30"
               onClick={() => setIsOpen(!isOpen)}
-              whileTap={{ scale: 0.9 }}
               aria-label="Toggle menu"
             >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={isOpen ? "close" : "open"}
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {isOpen ? <X size={20} /> : <Menu size={20} />}
-                </motion.div>
-              </AnimatePresence>
-            </motion.button>
+              {isOpen ? <X size={18} /> : <Menu size={18} />}
+            </button>
           </div>
         </div>
 
@@ -193,31 +159,28 @@ const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
               className="md:hidden overflow-hidden"
             >
-              <div className="py-4 bg-background/95 backdrop-blur-xl rounded-2xl mt-2 shadow-xl border border-border/50">
-                {navLinks.map((link, index) => (
-                  <motion.a
+              <div className="py-3 pb-5 space-y-1">
+                {navItems.map((link) => (
+                  <a
                     key={link.name}
                     href={link.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.05 }}
-                    className={`block py-3 px-4 mx-2 rounded-xl transition-all ${
-                      activeSection === link.href.replace("#", "")
-                        ? "bg-primary/10 text-primary font-medium"
-                        : "text-muted-foreground hover:text-foreground hover:bg-muted"
+                    className={`block py-2.5 px-4 rounded-xl text-sm font-medium transition-all ${
+                      activeSection === link.id
+                        ? "bg-primary/10 text-primary"
+                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
                     {link.name}
-                  </motion.a>
+                  </a>
                 ))}
-                <div className="px-4 pt-4">
-                  <Button variant="hero" className="w-full" asChild>
+                <div className="pt-2 px-2">
+                  <Button variant="hero" className="w-full rounded-xl" size="sm" asChild>
                     <a href="#contact" onClick={() => setIsOpen(false)}>
-                      Let's Talk →
+                      Let's Talk
                     </a>
                   </Button>
                 </div>
