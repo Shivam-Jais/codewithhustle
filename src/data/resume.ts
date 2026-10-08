@@ -148,9 +148,33 @@ export interface Project {
   technologies: string[];
   featured: boolean;
   githubUrl?: string;
+  /** Relative path to a dedicated detail page (e.g. "/projects/p-gym") */
+  detailPagePath?: string;
+  /** Download URL for APK (leave undefined until the APK is published) */
+  apkUrl?: string;
 }
 
 export const PROJECTS: Project[] = [
+  {
+    title: "P-GYM",
+    category: "mobile",
+    featured: true,
+    detailPagePath: "/projects/p-gym",
+    // apkUrl: "https://your-cdn.com/pgym.apk", // Uncomment and set when APK is ready
+    description:
+      "Full-stack Gym Management Android app with membership subscriptions, Razorpay payments, Firebase push notifications, admin dashboard, and automated expiry reminders.",
+    highlights: [
+      "Membership & Subscription Management — create, renew, and track gym plans with expiry alerts",
+      "Razorpay Payment Integration — secure in-app subscription checkout with receipt verification",
+      "Firebase Push Notifications — automated reminders for upcoming subscription expiry",
+      "Password Reset via Email — secure token-based password reset flow using Node.js + Nodemailer",
+      "Admin Dashboard — view all members, subscription statuses, revenue metrics, and manage plans",
+      "Subscription Expiry Reminders — cron-driven backend alerts 3 days before membership expires",
+      "Exercise & Gallery Content — categorised exercise library with images and descriptions",
+      "Force-Update Support — server-side version gating to ensure users always run the latest build",
+    ],
+    technologies: ["React Native", "Expo", "JavaScript", "Node.js", "Firebase", "MongoDB", "Razorpay", "REST APIs"],
+  },
   {
     title: "ETA Mobile Application",
     category: "mobile",

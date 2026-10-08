@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Github, ExternalLink, ChevronRight, Layers, X } from "lucide-react";
+import { Github, ExternalLink, ChevronRight, Layers, X, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PROJECTS, PERSONAL, type Project } from "@/data/resume";
+import { useNavigate } from "react-router-dom";
 
 const categoryLabels: Record<string, string> = {
   all: "All Projects",
@@ -27,10 +28,19 @@ const categoryIcons: Record<string, string> = {
 };
 
 const Projects = () => {
+  const navigate = useNavigate();
   const [activeFilter, setActiveFilter] = useState("all");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  const handleProjectClick = (project: Project) => {
+    if (project.detailPagePath) {
+      navigate(project.detailPagePath);
+    } else {
+      setSelectedProject(project);
+    }
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -129,7 +139,7 @@ const Projects = () => {
                       ? "border-primary/30 hover:border-primary/50"
                       : "border-border/40 hover:border-primary/20"
                   }`}
-                  onClick={() => setSelectedProject(project)}
+                  onClick={() => handleProjectClick(project)}
                 >
                   {/* Project header with gradient */}
                   <div className={`h-32 bg-gradient-to-br ${categoryColors[project.category] || "from-gray-500 to-gray-600"} relative flex items-end p-5`}>
@@ -174,8 +184,17 @@ const Projects = () => {
 
                     {/* View details CTA */}
                     <div className="flex items-center text-sm text-primary font-medium group-hover:gap-2 gap-1 transition-all duration-300">
-                      View Details
-                      <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                      {project.detailPagePath ? (
+                        <>
+                          View Full Page
+                          <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                        </>
+                      ) : (
+                        <>
+                          View Details
+                          <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                        </>
+                      )}
                     </div>
                   </div>
                 </motion.div>
