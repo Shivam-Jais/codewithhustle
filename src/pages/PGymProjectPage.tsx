@@ -179,7 +179,13 @@ const PGymProjectPage = () => {
       <nav className="sticky top-0 z-40 bg-background/80 backdrop-blur-2xl border-b border-border/40">
         <div className="container mx-auto px-4 lg:px-8 flex items-center justify-between h-16">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              if (window.history.state && window.history.state.idx > 0) {
+                navigate(-1);
+              } else {
+                navigate("/");
+              }
+            }}
             className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors group"
           >
             <ArrowLeft
