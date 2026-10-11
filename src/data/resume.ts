@@ -160,7 +160,7 @@ export const PROJECTS: Project[] = [
     category: "mobile",
     featured: true,
     detailPagePath: "/projects/p-gym",
-    apkUrl: "https://github.com/Shivam-Jais/codewithhustle/releases/download/v1.1.1/app-release.apk",
+    apkUrl: "https://github.com/Shivam-Jais/codewithhustle/releases/download/v1.1.2/app-release.apk",
     description:
       "Full-stack Gym Management Android app with membership subscriptions, Razorpay payments, Firebase push notifications, admin dashboard, and automated expiry reminders.",
     highlights: [
