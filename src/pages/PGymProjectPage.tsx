@@ -121,8 +121,8 @@ const SCREENSHOTS = [
   },
 ];
 
-// ─── APK Download URL (replace with real URL when ready) ──────────────────────
-const APK_URL: string | null = null; // e.g. "https://cdn.example.com/pgym-v1.0.apk"
+// ─── APK Download URL ─────────────────────────────────────────────────────────
+const APK_URL = "https://github.com/Shivam-Jais/codewithhustle/releases/download/v1.1.1/app-release.apk";
 
 // ─── Component ────────────────────────────────────────────────────────────────
 const PGymProjectPage = () => {
@@ -212,14 +212,13 @@ const PGymProjectPage = () => {
               variant="hero"
               size="sm"
               className="rounded-full gap-2"
-              disabled={!APK_URL}
-              onClick={() => {
-                if (APK_URL) window.open(APK_URL, "_blank");
-              }}
-              title={APK_URL ? "Download APK" : "APK coming soon"}
+              asChild
+              title="Download APK"
             >
-              <Download size={14} />
-              Download APK
+              <a href={APK_URL} download="app-release.apk">
+                <Download size={14} />
+                Download APK
+              </a>
             </Button>
           </div>
         </div>
@@ -284,19 +283,21 @@ const PGymProjectPage = () => {
                 variant="hero"
                 size="lg"
                 className="rounded-full gap-2 group"
-                disabled={!APK_URL}
-                onClick={() => {
-                  if (APK_URL) window.open(APK_URL, "_blank");
-                }}
-                id="pgym-download-apk-hero"
-                aria-label={APK_URL ? "Download P-GYM APK" : "P-GYM APK coming soon"}
-                title={APK_URL ? "Download P-GYM APK" : "APK will be available soon"}
+                asChild
               >
-                <Download
-                  size={18}
-                  className="group-hover:animate-bounce"
-                />
-                {APK_URL ? "Download APK" : "APK Coming Soon"}
+                <a
+                  href={APK_URL}
+                  download="app-release.apk"
+                  id="pgym-download-apk-hero"
+                  aria-label="Download P-GYM APK"
+                  title="Download P-GYM APK"
+                >
+                  <Download
+                    size={18}
+                    className="group-hover:animate-bounce"
+                  />
+                  Download APK
+                </a>
               </Button>
 
               <Button
@@ -622,26 +623,20 @@ const PGymProjectPage = () => {
                 variant="hero"
                 size="lg"
                 className="rounded-full px-10 gap-3 text-base group"
-                disabled={!APK_URL}
-                onClick={() => {
-                  if (APK_URL) window.open(APK_URL, "_blank");
-                }}
-                aria-label={
-                  APK_URL
-                    ? "Download P-GYM APK for Android"
-                    : "P-GYM APK is coming soon"
-                }
-                title={
-                  APK_URL
-                    ? "Download P-GYM APK"
-                    : "APK URL will be set when available"
-                }
+                asChild
               >
-                <Download
-                  size={20}
-                  className={APK_URL ? "group-hover:animate-bounce" : "opacity-50"}
-                />
-                {APK_URL ? "Download APK" : "APK Coming Soon"}
+                <a
+                  href={APK_URL}
+                  download="app-release.apk"
+                  aria-label="Download P-GYM APK for Android"
+                  title="Download P-GYM APK"
+                >
+                  <Download
+                    size={20}
+                    className="group-hover:animate-bounce"
+                  />
+                  Download APK
+                </a>
               </Button>
 
               <Button
