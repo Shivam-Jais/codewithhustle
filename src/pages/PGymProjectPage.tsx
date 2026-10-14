@@ -100,22 +100,22 @@ const TECH_STACK = [
 // ─── Screenshots Data ──────────────────────────────────────────────────────────
 const SCREENSHOTS = [
   {
-    src: "/pgym-dashboard.png",
+    src: "/p-gym/pgym-dashboard.png",
     title: "Home Dashboard",
     description: "Main dashboard with membership status, stats overview, and quick actions.",
   },
   {
-    src: "/pgym-membership.png",
+    src: "/p-gym/pgym-membership.png",
     title: "Subscription Plans",
     description: "Browse and subscribe to gym membership plans with integrated Razorpay checkout.",
   },
   {
-    src: "/pgym-exercise.png",
+    src: "/p-gym/pgym-exercise.png",
     title: "Exercise Gallery",
     description: "Categorised exercise library with muscle group filters and difficulty levels.",
   },
   {
-    src: "/pgym-admin.png",
+    src: "/p-gym/pgym-admin.png",
     title: "Admin Dashboard",
     description: "Admin panel showing member management, revenue, and subscription analytics.",
   },

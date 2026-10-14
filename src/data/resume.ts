@@ -152,6 +152,8 @@ export interface Project {
   detailPagePath?: string;
   /** Download URL for APK (leave undefined until the APK is published) */
   apkUrl?: string;
+  /** Google Play Store URL */
+  playStoreUrl?: string;
 }
 
 export const PROJECTS: Project[] = [
@@ -179,6 +181,8 @@ export const PROJECTS: Project[] = [
     title: "ETA Mobile Application",
     category: "mobile",
     featured: true,
+    detailPagePath: "/projects/eta-mobile",
+    playStoreUrl: "https://play.google.com/store/apps/details?id=eta.ETAMobile&hl=en_IN",
     description:
       "Production mobile application for shipment tracking and logistics management with real-time updates and optimized synchronization.",
     highlights: [
@@ -191,19 +195,39 @@ export const PROJECTS: Project[] = [
     technologies: ["React Native", "Expo", "JWT", "REST APIs", "Context API", "Android"],
   },
   {
-    title: "Task Cafe",
+    title: "TaskCafe",
     category: "mobile",
     featured: true,
+    detailPagePath: "/projects/taskcafe",
     description:
-      "Cross-platform task management application with SOAP API integration, role-based access control, and Firebase push notifications.",
+      "Android task-entry app for ETA — record, manage, and track tasks with workspace categories, priority levels, filters, and SOAP API integration.",
     highlights: [
-      "Built with React Native (Expo), SOAP APIs, FCM, and REST API integration across Android and iOS",
-      "Implemented task updates, editable dropdowns, assignee mapping, and role-based access",
-      "Upgraded project for latest Android SDK requirements, resolved Gradle and TypeScript issues",
-      "Configured Firebase, resolved FCM token generation, validated push notification workflows",
-      "End-to-end testing across Android and iOS platforms",
+      "Implemented React Native UI screens: login, task list, new task form, task update, profile, and notifications",
+      "Integrated SOAP APIs for task creation, retrieval, filtering, and status updates",
+      "Built task filters by workspace, priority, status, and task type with a clean filter sheet UI",
+      "Configured Firebase Cloud Messaging (FCM) and resolved token generation issues",
+      "Upgraded project for latest Android SDK; resolved Gradle and TypeScript compilation issues",
+      "Built and tested Android APK releases (v1.4.1); performed end-to-end functional testing",
     ],
-    technologies: ["React Native", "Expo", "SOAP APIs", "Firebase", "FCM", "Android", "iOS"],
+    technologies: ["React Native", "Expo", "SOAP APIs", "Firebase", "FCM", "Android", "JavaScript"],
+  },
+  {
+    title: "COGNISEXT",
+    category: "mobile",
+    featured: true,
+    detailPagePath: "/projects/cognisext",
+    playStoreUrl: "https://play.google.com/store/apps/details?id=com.cognisext.text&hl=en_IN",
+    description:
+      "Android social communication app — anonymous avatar-based profiles, shared-interest discovery, and real-time WebSocket-powered chat with end-to-end encryption.",
+    highlights: [
+      "Implemented React Native screens: splash, onboarding, registration/login, profile, avatar picker, chat, and account settings",
+      "Integrated WebSocket client for real-time message delivery — handled incoming events and live UI updates without polling",
+      "Connected UI to REST APIs for user registration, login, profile retrieval, and profile updates",
+      "Built avatar picker grid, profile editing (personal details, About Me, Interests), and account management screens",
+      "Implemented onboarding carousel with T&C flow and navigated users through registration to the main app",
+      "Performed end-to-end testing of registration, login, chat, profile edit, and account management flows on Android",
+    ],
+    technologies: ["React Native", "Expo", "WebSockets", "REST APIs", "JavaScript", "Android"],
   },
   {
     title: "ETA-GIT Desktop Application",

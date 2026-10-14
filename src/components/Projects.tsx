@@ -125,80 +125,122 @@ const Projects = () => {
           {/* Projects Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
             <AnimatePresence mode="popLayout">
-              {sortedProjects.map((project) => (
-                <motion.div
-                  key={project.title}
-                  layout
-                  variants={itemVariants}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.3 }}
-                  className={`group bg-card border rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-lg ${
-                    project.featured
-                      ? "border-primary/30 hover:border-primary/50"
-                      : "border-border/40 hover:border-primary/20"
-                  }`}
-                  onClick={() => handleProjectClick(project)}
-                >
-                  {/* Project header with gradient */}
-                  <div className={`h-32 bg-gradient-to-br ${categoryColors[project.category] || "from-gray-500 to-gray-600"} relative flex items-end p-5`}>
-                    {/* Category icon */}
-                    <span className="absolute top-4 right-4 text-2xl opacity-40">
-                      {categoryIcons[project.category]}
-                    </span>
+              {sortedProjects.map((project) => {
+                // Determine project image / logo for the card header
+                const projectImages: Record<string, { logo?: string; bg?: string }> = {
+                  TaskCafe: { logo: "/taskcafe/taskcafe-logo.png", bg: "/taskcafe/1.png" },
+                  "P-GYM": { bg: "/p-gym/pgym-dashboard.png" },
+                  COGNISEXT: { logo: "/cognitext/cogitext-logo.png", bg: "/cognitext/6.png" },
+                  "ETA Mobile Application": { logo: "/eta-mobile/eta-logo.png", bg: "/eta-mobile/3.png" },
+                };
+                const cardMedia = projectImages[project.title];
 
-                    {project.featured && (
-                      <span className="absolute top-4 left-4 px-2 py-0.5 bg-white/20 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wider rounded-full">
-                        Featured
-                      </span>
-                    )}
-
-                    <h3 className="text-white font-bold text-lg leading-tight drop-shadow-sm">
-                      {project.title}
-                    </h3>
-                  </div>
-
-                  {/* Content */}
-                  <div className="p-5">
-                    <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
-                      {project.description}
-                    </p>
-
-                    {/* Technologies */}
-                    <div className="flex flex-wrap gap-1.5 mb-4">
-                      {project.technologies.slice(0, 5).map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-0.5 text-[11px] bg-muted/60 text-foreground/70 rounded-md border border-border/30"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                      {project.technologies.length > 5 && (
-                        <span className="px-2 py-0.5 text-[11px] text-muted-foreground">
-                          +{project.technologies.length - 5}
-                        </span>
-                      )}
-                    </div>
-
-                    {/* View details CTA */}
-                    <div className="flex items-center text-sm text-primary font-medium group-hover:gap-2 gap-1 transition-all duration-300">
-                      {project.detailPagePath ? (
+                return (
+                  <motion.div
+                    key={project.title}
+                    layout
+                    variants={itemVariants}
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.3 }}
+                    className={`group bg-card border rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-lg ${
+                      project.featured
+                        ? "border-primary/30 hover:border-primary/50"
+                        : "border-border/40 hover:border-primary/20"
+                    }`}
+                    onClick={() => handleProjectClick(project)}
+                  >
+                    {/* Project header */}
+                    <div className={`h-32 relative flex items-end p-5 overflow-hidden ${
+                      cardMedia?.bg
+                        ? ""
+                        : `bg-gradient-to-br ${categoryColors[project.category] || "from-gray-500 to-gray-600"}`
+                    }`}>
+                      {/* Background image for projects with screenshots */}
+                      {cardMedia?.bg && (
                         <>
-                          View Full Page
-                          <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                        </>
-                      ) : (
-                        <>
-                          View Details
-                          <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                          <img
+                            src={cardMedia.bg}
+                            alt={`${project.title} preview`}
+                            className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
                         </>
                       )}
+
+                      {/* Category icon (only for non-image cards) */}
+                      {!cardMedia?.bg && (
+                        <span className="absolute top-4 right-4 text-2xl opacity-40">
+                          {categoryIcons[project.category]}
+                        </span>
+                      )}
+
+                      {/* App logo badge */}
+                      {cardMedia?.logo && (
+                        <div className="absolute top-3 right-3 w-9 h-9 rounded-xl overflow-hidden border border-white/20 shadow-lg bg-[#0a0a14]">
+                          <img
+                            src={cardMedia.logo}
+                            alt={`${project.title} logo`}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                          />
+                        </div>
+                      )}
+
+                      {project.featured && (
+                        <span className="absolute top-4 left-4 px-2 py-0.5 bg-white/20 backdrop-blur-sm text-white text-[10px] font-semibold uppercase tracking-wider rounded-full">
+                          Featured
+                        </span>
+                      )}
+
+                      <h3 className="relative text-white font-bold text-lg leading-tight drop-shadow-sm">
+                        {project.title}
+                      </h3>
                     </div>
-                  </div>
-                </motion.div>
-              ))}
+
+                    {/* Content */}
+                    <div className="p-5">
+                      <p className="text-sm text-muted-foreground mb-4 line-clamp-2 leading-relaxed">
+                        {project.description}
+                      </p>
+
+                      {/* Technologies */}
+                      <div className="flex flex-wrap gap-1.5 mb-4">
+                        {project.technologies.slice(0, 5).map((tech) => (
+                          <span
+                            key={tech}
+                            className="px-2 py-0.5 text-[11px] bg-muted/60 text-foreground/70 rounded-md border border-border/30"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                        {project.technologies.length > 5 && (
+                          <span className="px-2 py-0.5 text-[11px] text-muted-foreground">
+                            +{project.technologies.length - 5}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* View details CTA */}
+                      <div className="flex items-center text-sm text-primary font-medium group-hover:gap-2 gap-1 transition-all duration-300">
+                        {project.detailPagePath ? (
+                          <>
+                            View Case Study
+                            <ArrowUpRight size={14} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                          </>
+                        ) : (
+                          <>
+                            View Details
+                            <ChevronRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </AnimatePresence>
           </div>
 

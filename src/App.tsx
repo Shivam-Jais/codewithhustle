@@ -7,6 +7,9 @@ import { ThemeProvider } from "next-themes";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import PGymProjectPage from "./pages/PGymProjectPage";
+import TaskCafeProjectPage from "./pages/TaskCafeProjectPage";
+import CognisextProjectPage from "./pages/CognisextProjectPage";
+import ETAMobileProjectPage from "./pages/ETAMobileProjectPage";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +23,9 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/projects/p-gym" element={<PGymProjectPage />} />
+            <Route path="/projects/taskcafe" element={<TaskCafeProjectPage />} />
+            <Route path="/projects/cognisext" element={<CognisextProjectPage />} />
+            <Route path="/projects/eta-mobile" element={<ETAMobileProjectPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
