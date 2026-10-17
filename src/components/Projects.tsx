@@ -111,11 +111,10 @@ const Projects = () => {
               <button
                 key={cat}
                 onClick={() => setActiveFilter(cat)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeFilter === cat
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeFilter === cat
                     ? "bg-primary text-primary-foreground shadow-md"
                     : "bg-card text-muted-foreground border border-border/40 hover:border-primary/30 hover:text-foreground"
-                }`}
+                  }`}
               >
                 {categoryLabels[cat] || cat}
               </button>
@@ -129,9 +128,12 @@ const Projects = () => {
                 // Determine project image / logo for the card header
                 const projectImages: Record<string, { logo?: string; bg?: string }> = {
                   TaskCafe: { logo: "/taskcafe/taskcafe-logo.png", bg: "/taskcafe/1.png" },
-                  "P-GYM": { bg: "/p-gym/pgym-dashboard.png" },
+                  "P-GYM": { bg: "/p-gym/1.jpeg" },
                   COGNISEXT: { logo: "/cognitext/cogitext-logo.png", bg: "/cognitext/6.png" },
                   "ETA Mobile Application": { logo: "/eta-mobile/eta-logo.png", bg: "/eta-mobile/3.png" },
+                  "Ajmera Trends": { bg: "/web-projects/ajmera-preview.png" },
+                  "Community Café": { bg: "/web-projects/cafe-preview.png" },
+                  "Pritam Films": { bg: "/web-projects/cinematic-preview.png" },
                 };
                 const cardMedia = projectImages[project.title];
 
@@ -144,19 +146,17 @@ const Projects = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 0.3 }}
-                    className={`group bg-card border rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-lg ${
-                      project.featured
+                    className={`group bg-card border rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-lg ${project.featured
                         ? "border-primary/30 hover:border-primary/50"
                         : "border-border/40 hover:border-primary/20"
-                    }`}
+                      }`}
                     onClick={() => handleProjectClick(project)}
                   >
                     {/* Project header */}
-                    <div className={`h-32 relative flex items-end p-5 overflow-hidden ${
-                      cardMedia?.bg
+                    <div className={`h-32 relative flex items-end p-5 overflow-hidden ${cardMedia?.bg
                         ? ""
                         : `bg-gradient-to-br ${categoryColors[project.category] || "from-gray-500 to-gray-600"}`
-                    }`}>
+                      }`}>
                       {/* Background image for projects with screenshots */}
                       {cardMedia?.bg && (
                         <>

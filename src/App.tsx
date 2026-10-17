@@ -10,6 +10,9 @@ import PGymProjectPage from "./pages/PGymProjectPage";
 import TaskCafeProjectPage from "./pages/TaskCafeProjectPage";
 import CognisextProjectPage from "./pages/CognisextProjectPage";
 import ETAMobileProjectPage from "./pages/ETAMobileProjectPage";
+import AjmeraLuxuryProjectPage from "./pages/AjmeraLuxuryProjectPage";
+import CafeCoffeeDayProjectPage from "./pages/CafeCoffeeDayProjectPage";
+import CinematicLovProjectPage from "./pages/CinematicLovProjectPage";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +29,9 @@ const App = () => (
             <Route path="/projects/taskcafe" element={<TaskCafeProjectPage />} />
             <Route path="/projects/cognisext" element={<CognisextProjectPage />} />
             <Route path="/projects/eta-mobile" element={<ETAMobileProjectPage />} />
+            <Route path="/projects/ajmera-luxury" element={<AjmeraLuxuryProjectPage />} />
+            <Route path="/projects/cafe-coffee-day" element={<CafeCoffeeDayProjectPage />} />
+            <Route path="/projects/cinematic-lov" element={<CinematicLovProjectPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
