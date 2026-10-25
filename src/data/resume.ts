@@ -212,10 +212,10 @@ export const PROJECTS: Project[] = [
     technologies: ["React Native", "Expo", "SOAP APIs", "Firebase", "FCM", "Android", "JavaScript"],
   },
   {
-    title: "COGNISEXT",
+    title: "COGNITEXT",
     category: "mobile",
     featured: true,
-    detailPagePath: "/projects/cognisext",
+    detailPagePath: "/projects/cognitext",
     playStoreUrl: "https://play.google.com/store/apps/details?id=com.cognisext.text&hl=en_IN",
     description:
       "Android social communication app — anonymous avatar-based profiles, shared-interest discovery, and real-time WebSocket-powered chat with end-to-end encryption.",
@@ -280,6 +280,66 @@ export const PROJECTS: Project[] = [
       "Content optimization and on-page SEO improvements",
     ],
     technologies: ["Technical SEO", "Performance Optimization", "On-page SEO"],
+  },
+  {
+    title: "Sharma Fabrication",
+    category: "web",
+    featured: true,
+    detailPagePath: "/projects/sharma-fabrication",
+    description:
+      "Industrial fabrication company website — showcasing structural steel, architectural metalwork, and precision manufacturing services to builders, architects, and commercial clients.",
+    highlights: [
+      "Full-bleed industrial hero presenting the fabrication brand and core services",
+      "Services section covering structural steel, architectural metalwork, and custom fabrication",
+      "Gallery showcasing completed fabrication projects and craftsmanship",
+      "Contact and enquiry section for client outreach and project requests",
+    ],
+    technologies: ["React", "Vite", "Tailwind CSS", "Netlify"],
+  },
+  {
+    title: "Pritam Cinematic",
+    category: "web",
+    featured: true,
+    detailPagePath: "/projects/pritam-cinematic",
+    description:
+      "Cinematic wedding photography portfolio for Pritam Cinematic — an image-first showcase of wedding films and photography with a dramatic dark aesthetic and seamless booking experience.",
+    highlights: [
+      "Dramatic full-bleed hero with cinematic wedding imagery and strong typographic treatment",
+      "Portfolio gallery with filterable wedding photography and cinematic film collections",
+      "Services section covering wedding films, pre-wedding shoots, and couple sessions",
+      "Book Your Date CTA for direct client booking enquiries",
+    ],
+    technologies: ["React", "Vite", "Tailwind CSS", "Netlify"],
+  },
+  {
+    title: "Ajmera Trends",
+    category: "web",
+    featured: true,
+    detailPagePath: "/projects/ajmera-trends",
+    description:
+      "Premium fashion showroom website for Ajmera Trends — a curated digital presence for a family fashion destination in Cuttack, featuring sarees, lehengas, menswear, and kidswear.",
+    highlights: [
+      "Editorial fashion hero with luxury typography and full-bleed imagery",
+      "Multi-category collections showcase — sarees, bridal lehengas, menswear, kidswear",
+      "Brand heritage storytelling and showroom story",
+      "Customer reviews, store visit information, and Google Maps integration",
+    ],
+    technologies: ["React", "Vite", "Tailwind CSS", "Netlify"],
+  },
+  {
+    title: "Cafe Coffee Day",
+    category: "web",
+    featured: true,
+    detailPagePath: "/projects/cafe-coffee-day",
+    description:
+      "Warm, inviting café website for Cafe Coffee Day — a brand-led digital experience presenting the menu, ambiance, and story of an artisan coffee destination.",
+    highlights: [
+      "Welcoming hero section presenting the café's warm atmosphere and brand identity",
+      "Full menu showcase with coffee drinks, pastries, and brunch items",
+      "About and story section reflecting the café's ethos and community values",
+      "Contact and location information for in-person visits",
+    ],
+    technologies: ["React", "Vite", "Tailwind CSS", "Netlify"],
   },
 ];
 

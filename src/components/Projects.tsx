@@ -129,11 +129,12 @@ const Projects = () => {
                 const projectImages: Record<string, { logo?: string; bg?: string }> = {
                   TaskCafe: { logo: "/taskcafe/taskcafe-logo.png", bg: "/taskcafe/1.png" },
                   "P-GYM": { bg: "/p-gym/1.jpeg" },
-                  COGNISEXT: { logo: "/cognitext/cogitext-logo.png", bg: "/cognitext/6.png" },
+                  COGNITEXT: { logo: "/cognitext/cogitext-logo.png", bg: "/cognitext/6.png" },
                   "ETA Mobile Application": { logo: "/eta-mobile/eta-logo.png", bg: "/eta-mobile/3.png" },
-                  "Ajmera Trends": { bg: "/web-projects/ajmera-preview.png" },
-                  "Community Café": { bg: "/web-projects/cafe-preview.png" },
-                  "Pritam Films": { bg: "/web-projects/cinematic-preview.png" },
+                  "Sharma Fabrication": { bg: "/web-projects/sharma-preview.png" },
+                  "Pritam Cinematic": { bg: "/web-projects/pritam-cinematic-preview.png" },
+                  "Ajmera Trends": { bg: "/web-projects/ajmera-trends-preview.png" },
+                  "Cafe Coffee Day": { bg: "/web-projects/cafe-coffee-day-preview.png" },
                 };
                 const cardMedia = projectImages[project.title];
 

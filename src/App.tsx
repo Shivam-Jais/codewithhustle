@@ -10,6 +10,10 @@ import PGymProjectPage from "./pages/PGymProjectPage";
 import TaskCafeProjectPage from "./pages/TaskCafeProjectPage";
 import CognisextProjectPage from "./pages/CognisextProjectPage";
 import ETAMobileProjectPage from "./pages/ETAMobileProjectPage";
+import SharmaFabricationProjectPage from "./pages/SharmaFabricationProjectPage";
+import PritamCinematicProjectPage from "./pages/PritamCinematicProjectPage";
+import AjmeraTrendsProjectPage from "./pages/AjmeraTrendsProjectPage";
+import CafeCoffeeDayProjectPage from "./pages/CafeCoffeeDayProjectPage";
 
 const queryClient = new QueryClient();
 
@@ -24,8 +28,12 @@ const App = () => (
             <Route path="/" element={<Index />} />
             <Route path="/projects/p-gym" element={<PGymProjectPage />} />
             <Route path="/projects/taskcafe" element={<TaskCafeProjectPage />} />
-            <Route path="/projects/cognisext" element={<CognisextProjectPage />} />
+            <Route path="/projects/cognitext" element={<CognisextProjectPage />} />
             <Route path="/projects/eta-mobile" element={<ETAMobileProjectPage />} />
+            <Route path="/projects/sharma-fabrication" element={<SharmaFabricationProjectPage />} />
+            <Route path="/projects/pritam-cinematic" element={<PritamCinematicProjectPage />} />
+            <Route path="/projects/ajmera-trends" element={<AjmeraTrendsProjectPage />} />
+            <Route path="/projects/cafe-coffee-day" element={<CafeCoffeeDayProjectPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -497,7 +497,7 @@ const ETAMobileProjectPage = () => {
             {/* Gallery: large active + thumbnail strip */}
             <motion.div
               variants={itemVariants}
-              className="grid lg:grid-cols-[1fr_220px] gap-6 mb-8"
+              className="grid lg:grid-cols-[1fr_200px] gap-6 mb-8"
             >
               {/* Active screenshot */}
               <div
@@ -550,7 +550,7 @@ const ETAMobileProjectPage = () => {
               </div>
 
               {/* Thumbnail strip */}
-              <div className="grid grid-cols-4 lg:grid-cols-1 gap-3">
+              <div className="grid grid-cols-3 lg:grid-cols-1 gap-3 lg:max-h-[560px] lg:overflow-y-auto lg:scrollbar-thin">
                 {SCREENSHOTS.map((shot, i) => (
                   <button
                     key={shot.src}
@@ -937,10 +937,10 @@ const ETAMobileProjectPage = () => {
                 variant="heroOutline"
                 size="lg"
                 className="rounded-full gap-2 group"
-                onClick={() => navigate("/projects/taskcafe")}
+                onClick={() => navigate("/projects/p-gym")}
               >
-                View TaskCafe
-                <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                Next: P-GYM
+                <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
 

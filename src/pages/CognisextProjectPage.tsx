@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
+  ExternalLink,
   ChevronLeft,
   ChevronRight,
   X,
@@ -307,9 +308,9 @@ const CognisextProjectPage = () => {
       {/* ── Hero Section ── */}
       <section
         className="relative overflow-hidden py-20 lg:py-32"
-        aria-label="COGNISEXT project overview"
+        aria-label="COGNITEXT project overview"
       >
-        {/* Background ambient blobs — violet/purple identity for COGNISEXT */}
+        {/* Background ambient blobs — violet/purple identity for COGNITEXT */}
         <div
           className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full opacity-[0.08] blur-[130px] pointer-events-none"
           style={{ background: "radial-gradient(circle, hsl(270 80% 65%), transparent 70%)" }}
@@ -359,7 +360,7 @@ const CognisextProjectPage = () => {
                       <span className="bg-clip-text text-transparent bg-gradient-to-r from-violet-400 via-purple-400 to-pink-400">
                         COGNI
                       </span>
-                      <span className="text-foreground">SEXT</span>
+                      <span className="text-foreground">TEXT</span>
                     </h1>
                     <p className="text-muted-foreground text-base mt-1 font-medium">
                       Anonymous connections and real-time chat
@@ -369,7 +370,7 @@ const CognisextProjectPage = () => {
 
                 {/* Summary */}
                 <motion.p variants={itemVariants} className="text-lg text-muted-foreground leading-relaxed max-w-2xl mb-6">
-                  COGNISEXT is an{" "}
+                  COGNITEXT is an{" "}
                   <strong className="text-foreground">Android social communication application</strong>{" "}
                   published by ETAmobile. It enables users to create privacy-conscious profiles,
                   discover connections with shared interests, and communicate through{" "}
@@ -491,7 +492,7 @@ const CognisextProjectPage = () => {
             {/* Gallery layout: large active + thumbnail strip */}
             <motion.div
               variants={itemVariants}
-              className="grid lg:grid-cols-[1fr_220px] gap-6 mb-8"
+              className="grid lg:grid-cols-[1fr_200px] gap-6 mb-8"
             >
               {/* Active screenshot */}
               <div
@@ -544,7 +545,7 @@ const CognisextProjectPage = () => {
               </div>
 
               {/* Thumbnail strip */}
-              <div className="grid grid-cols-4 lg:grid-cols-1 gap-3">
+              <div className="grid grid-cols-3 lg:grid-cols-1 gap-3 lg:max-h-[560px] lg:overflow-y-auto lg:scrollbar-thin">
                 {SCREENSHOTS.map((shot, i) => (
                   <button
                     key={shot.src}
@@ -614,7 +615,7 @@ const CognisextProjectPage = () => {
                 </h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    COGNITEXT (presented as COGNISEXT) is an Android social communication application
+                    COGNITEXT is an Android social communication application
                     published by ETAmobile. It is designed to help users discover connections based on
                     shared interests and communicate through a real-time, chat-first interface — while
                     preserving a degree of privacy through avatar-based identities rather than photo uploads.
@@ -923,10 +924,10 @@ const CognisextProjectPage = () => {
                 variant="heroOutline"
                 size="lg"
                 className="rounded-full gap-2 group"
-                onClick={() => navigate("/projects/taskcafe")}
+                onClick={() => navigate("/projects/eta-mobile")}
               >
-                View TaskCafe
-                <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                Next: ETA Mobile
+                <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
 

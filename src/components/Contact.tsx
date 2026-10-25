@@ -41,8 +41,6 @@ const Contact = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!formRef.current) return;
-
     if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       toast({
         title: "Error",
@@ -55,11 +53,15 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      await emailjs.sendForm(
+      await emailjs.send(
         "service_38aeh9e",
         "template_nji4xof",
-        formRef.current,
-        "Hn2VL7n7EPArqaQb5"
+        {
+          from_name: formData.name.trim(),
+          from_email: formData.email.trim(),
+          message: formData.message.trim(),
+        },
+        { publicKey: "Hn2VL7n7EPArqaQb5" }
       );
 
       setIsSuccess(true);
@@ -70,11 +72,26 @@ const Contact = () => {
       setFormData({ name: "", email: "", message: "" });
 
       setTimeout(() => setIsSuccess(false), 3000);
-    } catch (error) {
+    } catch (error: any) {
       console.error("EmailJS Error:", error);
+
+      // Provide a descriptive fallback based on the error
+      const status = error?.status;
+      let description = "Failed to send message.";
+
+      if (status === 400) {
+        description = "Email service configuration error. Please use the email link below instead.";
+      } else if (status === 403) {
+        description = "Email service access denied. Please use the email link below instead.";
+      } else if (status === 429) {
+        description = "Too many requests. Please try again in a few minutes.";
+      } else {
+        description = "Could not send message right now. Please use the email link below instead.";
+      }
+
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again later.",
+        title: "Unable to Send",
+        description,
         variant: "destructive",
       });
     } finally {

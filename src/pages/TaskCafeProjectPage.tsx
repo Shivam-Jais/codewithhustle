@@ -515,7 +515,7 @@ const TaskCafeProjectPage = () => {
               </div>
 
               {/* Thumbnail strip */}
-              <div className="grid grid-cols-3 lg:grid-cols-1 gap-3">
+              <div className="grid grid-cols-3 lg:grid-cols-1 gap-3 lg:max-h-[560px] lg:overflow-y-auto lg:scrollbar-thin">
                 {SCREENSHOTS.map((shot, i) => (
                   <button
                     key={shot.src}
@@ -873,9 +873,9 @@ const TaskCafeProjectPage = () => {
                 variant="heroOutline"
                 size="lg"
                 className="rounded-full gap-2 group"
-                onClick={() => navigate("/projects/p-gym")}
+                onClick={() => navigate("/projects/cognitext")}
               >
-                Next: P-GYM
+                Next: COGNITEXT
                 <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Button>
             </motion.div>
