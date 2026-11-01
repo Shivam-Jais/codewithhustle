@@ -113,7 +113,7 @@ const About = () => {
 
               <div className="pt-4">
                 <Button variant="heroOutline" className="rounded-full group" asChild>
-                  <a href={PERSONAL.resumePath} download="shivam-jaiswal-resume.pdf">
+                  <a href={PERSONAL.resumePath} download="resume.pdf">
                     <Download className="mr-2 group-hover:scale-110 transition-transform" size={16} />
                     Download Resume
                   </a>

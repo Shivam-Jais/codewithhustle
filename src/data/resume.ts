@@ -11,7 +11,7 @@ export const PERSONAL = {
   location: "Bhubaneswar, Odisha",
   github: "https://github.com/Shivam-Jais",
   linkedin: "https://linkedin.com/in/shivam-6371",
-  resumePath: "/resume/Shivam_Resume.pdf",
+  resumePath: "/resume/resume.pdf",
 } as const;
 
 export const PROFESSIONAL_SUMMARY =

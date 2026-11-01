@@ -173,7 +173,7 @@ const Hero = () => {
                 </a>
               </Button>
               <Button variant="heroOutline" size="lg" className="group rounded-full" asChild>
-                <a href={PERSONAL.resumePath} download="shivam-jaiswal-resume.pdf">
+                <a href={PERSONAL.resumePath} download="resume.pdf">
                   <Download
                     className="mr-1 group-hover:scale-110 transition-transform"
                     size={18}
