@@ -14,6 +14,7 @@ import SharmaFabricationProjectPage from "./pages/SharmaFabricationProjectPage";
 import PritamCinematicProjectPage from "./pages/PritamCinematicProjectPage";
 import AjmeraTrendsProjectPage from "./pages/AjmeraTrendsProjectPage";
 import CafeCoffeeDayProjectPage from "./pages/CafeCoffeeDayProjectPage";
+import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +35,7 @@ const App = () => (
             <Route path="/projects/pritam-cinematic" element={<PritamCinematicProjectPage />} />
             <Route path="/projects/ajmera-trends" element={<AjmeraTrendsProjectPage />} />
             <Route path="/projects/cafe-coffee-day" element={<CafeCoffeeDayProjectPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
